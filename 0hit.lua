@@ -132,26 +132,15 @@ end}
 
 RageSecondary:AddToggle{text = "Rapid Fire", skipflag = true, callback = function(v)
 	rapidFire = v;
-	if v then
-		for _, wep in next, game:GetService("ReplicatedStorage").Weapons:GetChildren() do
-			if wep:FindFirstChild("Auto") then
-				wep:FindFirstChild("Auto").Value = true
-			end
-		end
-	else
-		for _, wep in next, game:GetService("ReplicatedStorage").Weapons:GetChildren() do
-			if wep:FindFirstChild("Auto") then
-				wep:FindFirstChild("Auto").Value = false
-			end
-		end
-	end
 end}
 
 RageSecondary:AddToggle{text = "Infinite Ammo", skipflag = true, callback = function(v)
-	for _, wep in next, game:GetService("ReplicatedStorage").Weapons:GetChildren() do
-		if wep:FindFirstChild("Ammo") and wep:FindFirstChild("StoredAmmo") then
-			wep:FindFirstChild("Ammo").Value = 999999
-			wep:FindFirstChild("StoredAmmo").Value = 999999
+	if v then
+		for _, wep in next, game:GetService("ReplicatedStorage").Weapons:GetChildren() do
+			if wep:FindFirstChild("Ammo") and wep:FindFirstChild("StoredAmmo") then
+				wep:FindFirstChild("Ammo").Value = 999999
+				wep:FindFirstChild("StoredAmmo").Value = 999999
+			end
 		end
 	end
 end}
@@ -685,33 +674,25 @@ game:GetService("RunService").RenderStepped:Connect(function()
 	if fly == true then
 		local chr = game.Players.LocalPlayer.Character
 		local hum = chr and chr:FindFirstChildWhichIsA("Humanoid")
-		game:GetService('Players').LocalPlayer.Character.PrimaryPart.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
+		game:GetService('Players').LocalPlayer.Character.PrimaryPart.AssemblyLinearVelocity = Vector3.new(0, 0.69, 0)
 		if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.W) then
 			if hum and hum.Parent then
-				if hum.MoveDirection.Magnitude > 0 then
-					chr:TranslateBy(workspace.CurrentCamera.CFrame.LookVector * (flySpeed/20))
-				end
+				game:GetService('Players').LocalPlayer.Character.PrimaryPart.AssemblyLinearVelocity = Vector3.new(1, 1, 1) * workspace.CurrentCamera.CFrame.LookVector * flySpeed * 3
 			end
 		end
 		if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.S) then
 			if hum and hum.Parent then
-				if hum.MoveDirection.Magnitude > 0 then
-					chr:TranslateBy(workspace.CurrentCamera.CFrame.LookVector * (-1) * (flySpeed/20))
-				end
+				game:GetService('Players').LocalPlayer.Character.PrimaryPart.AssemblyLinearVelocity = Vector3.new(1, 1, 1) * workspace.CurrentCamera.CFrame.LookVector * flySpeed * (-3)
 			end
 		end
 		if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.A) then
 			if hum and hum.Parent then
-				if hum.MoveDirection.Magnitude > 0 then
-					chr:TranslateBy(workspace.CurrentCamera.CFrame.RightVector * (-1) * (flySpeed/20))
-				end
+				game:GetService('Players').LocalPlayer.Character.PrimaryPart.AssemblyLinearVelocity = Vector3.new(1, 1, 1) * workspace.CurrentCamera.CFrame.RightVector * flySpeed * (-3)
 			end
 		end
 		if game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.D) then
 			if hum and hum.Parent then
-				if hum.MoveDirection.Magnitude > 0 then
-					chr:TranslateBy(workspace.CurrentCamera.CFrame.RightVector * (flySpeed/20))
-				end
+				game:GetService('Players').LocalPlayer.Character.PrimaryPart.AssemblyLinearVelocity = Vector3.new(1, 1, 1) * workspace.CurrentCamera.CFrame.RightVector * flySpeed * 3
 			end
 		end
 	end
